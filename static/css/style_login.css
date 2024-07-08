@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('https://s3.ap-southeast-1.amazonaws.com/images.asianage.com/images/aa-Cover-obqmq260bhrl1c4purg60kg670-20190224232721.Medi.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.login-container h1 {
+    font-size: 80px;
+    font-family: Pixeltype, sans-serif;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.login-icon {
+    height: 100px;
+}
+
+.logo-hust {
+    position: absolute;
+    height: 30px;
+    bottom: 5px;
+    left: 6px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    color: #006600;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #006600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.flash-messages {
+    margin-top: 20px;
+    color: red;
+}

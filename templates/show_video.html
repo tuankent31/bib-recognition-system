@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_show_video.css') }}">
+    <title>Video Visualization</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='elements/branch.png') }}" alt="Brand Logo" class="navbar-logo">
+                <span class="brand-name">NukaBot</span>
+            </a>
+        </div>
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="/bib_management">BIB Management</a></li>
+                <li class="dropdown">
+                    <a href="/bib-recognition/photo">BIB Recognition</a>
+                    <div class="dropdown-content">
+                        <a href="/bib-recognition/photo">Photo</a>
+                        <a href="/bib-recognition/video">Video</a>
+                        <a href="/batch-image-recognition">Batch Image Recognition</a>
+                    </div>
+                </li>
+                <li><a href="/image-gallery">Images Searching</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <img src="{{ url_for('static', filename='elements/admin.png') }}" alt="Admin Logo" class="admin-logo">
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+    <div class="container">
+    <h1>Tracking Video Visualization</h1>
+    <video width="1180" height="640" controls>
+        <source  src="{{ video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    </div>
+    <div class="footer">
+        CopyRight © Plasma Nuka Nugget - All rights reserved - Always remember that Hoang Sa and Truong Sa belong to VietNam  🏳  🏳  🏳
+    </div>
+</body>
+</html>

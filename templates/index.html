@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_index.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='elements/branch.png') }}" alt="Brand Logo" class="navbar-logo">
+                <span class="brand-name">NukaBot</span>
+            </a>
+        </div>
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="/bib_management">BIB Management</a></li>
+                <li class="dropdown">
+                    <a href="/bib-recognition/photo">BIB Recognition</a>
+                    <div class="dropdown-content">
+                        <a href="/bib-recognition/photo">Photo</a>
+                        <a href="/bib-recognition/video">Video</a>
+                        <a href="/batch-image-recognition">Batch Image Recognition</a>
+                    </div>
+                </li>
+                <li><a href="/image-gallery">Images Searching</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <img src="{{ url_for('static', filename='elements/admin.png') }}" alt="Admin Logo" class="admin-logo">
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="banner-slider">
+            <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+            <div class="slide-wrapper">
+                <div class="slides">
+                    <img src="{{ url_for('static', filename='elements/banner1.jpg') }}" alt="Banner 1" class="slide">
+                    <img src="{{ url_for('static', filename='elements/banner2.jpg') }}" alt="Banner 2" class="slide">
+                    <img src="{{ url_for('static', filename='elements/banner3.jpg') }}" alt="Banner 3" class="slide">
+                    <img src="{{ url_for('static', filename='elements/banner4.jpg') }}" alt="Banner 4" class="slide">
+                    <img src="{{ url_for('static', filename='elements/banner5.jpg') }}" alt="Banner 5" class="slide">
+                    <img src="{{ url_for('static', filename='elements/banner6.jpg') }}" alt="Banner 6" class="slide">
+                </div>
+            </div>
+            <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+        </div>
+
+        <div class="content">
+            <div class="left-side">
+                <h2>BIB Advanced System</h2>
+                <p>Run For Fun - Life is a Marathon, not only when you shoes up</p>
+                <h4>Hi Phạm Anh Tuấn, Your system is ready !</h4>
+
+                <div class="chart-container">
+                    <div class="chart-container-count">
+                    <p id="genderTotal"></p>
+                    <p>Total Male: {{ gender_ratio['Male'] }}</p>
+                    <p>Total Female: {{ gender_ratio['Female'] }}</p>
+                    </div>
+                    <div class="chart-graph">
+                        <canvas style="height: 100px; width: 100px" id="genderChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <img src="{{ url_for('static', filename='elements/default1.png') }}" alt="Default Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        CopyRight © Plasma Nuka Nugget - All rights reserved - Always remember that Hoang Sa and Truong Sa belong to VietNam  🏳  🏳  🏳
+    </div>
+    <script>
+        const ctx = document.getElementById('genderChart').getContext('2d');
+        const genderData = [{{ gender_ratio['Male'] }}, {{ gender_ratio['Female'] }}];
+        const totalGender = genderData.reduce((a, b) => a + b, 0);
+
+        const genderChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    label: 'Gender Ratio',
+                    data: genderData,
+                    backgroundColor: ['#36A2EB', '#FF6384'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const value = genderData[tooltipItem.dataIndex];
+                                return `${tooltipItem.label}: ${value} (${((value / totalGender) * 100).toFixed(2)}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        document.getElementById('genderTotal').textContent = `Total: ${totalGender}`;
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlides() {
+            slides.forEach((slide, index) => {
+                slide.style.display = 'none';
+                slide.classList.remove('highlight');
+            });
+
+            let centerIndex = currentSlide + 1;
+            if (centerIndex >= totalSlides) centerIndex = 0;
+
+            let leftIndex = currentSlide;
+            let rightIndex = currentSlide + 2;
+            if (rightIndex >= totalSlides) rightIndex = rightIndex - totalSlides;
+
+            slides[leftIndex].style.display = 'block';
+            slides[centerIndex].style.display = 'block';
+            slides[rightIndex].style.display = 'block';
+            slides[centerIndex].classList.add('highlight');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlides();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlides();
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            showSlides();
+        });
+    </script>
+</body>
+</html>

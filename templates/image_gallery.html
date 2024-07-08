@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_gallery.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='elements/branch.png') }}" alt="Brand Logo" class="navbar-logo">
+                <span class="brand-name">NukaBot</span>
+            </a>
+        </div>
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="/bib_management">BIB Management</a></li>
+                <li class="dropdown">
+                    <a href="/bib-recognition/photo">BIB Recognition</a>
+                    <div class="dropdown-content">
+                        <a href="/bib-recognition/photo">Photo</a>
+                        <a href="/bib-recognition/video">Video</a>
+                        <a href="/batch-image-recognition">Batch Image Recognition</a>
+                    </div>
+                </li>
+                <li><a href="/image-gallery">Images Searching</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <img src="{{ url_for('static', filename='elements/admin.png') }}" alt="Admin Logo" class="admin-logo">
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Image Gallery</h1>
+        <form method="post" action="{{ url_for('image_gallery') }}">
+            <input type="text" name="search_bib" placeholder="Enter BIB number" value="{{ search_bib }}">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if bib_info %}
+            <div class="bib-info">
+
+                <div class="bib-info-left">
+                    <img src="{{ url_for('static', filename='elements/default.png') }}" alt="Default Avatar">
+                </div>
+                <div class="bib-info-right">
+                    <p><strong>Name:</strong> {{ bib_info.Name }}</p>
+                    <p><strong>DOB:</strong> {{ bib_info.DOB }}</p>
+                    <p><strong>Age:</strong> {{ bib_info.Age }}</p>
+                    <p><strong>Gender:</strong> {{ bib_info.Gender }}</p>
+                    <p><strong>Phone Number:</strong> {{ bib_info.PhoneNumber }}</p>
+                    <p><strong>National:</strong> {{ bib_info.National }}</p>
+                    <p><strong>Date Register:</strong> {{ bib_info.DateRegister }}</p>
+                    <p><strong>Distance Type:</strong> {{ bib_info.DistanceType }}</p>
+                    <p><strong>Time:</strong> {{ bib_info.Time }}</p>
+                    <p><strong>Pace:</strong> {{ bib_info.Pace }}</p>
+                    <p><strong>Notes:</strong> {{ bib_info.Notes }}</p>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="gallery">
+            {% for image in images %}
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/' ~ image) }}" alt="{{ image }}">
+
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('image_gallery', page=page-1) }}">&laquo; Previous</a>
+            {% endif %}
+            {% for num in range(1, total_pages + 1) %}
+                {% if num == page %}
+                    <span class="current">{{ num }}</span>
+                {% else %}
+                    <a href="{{ url_for('image_gallery', page=num) }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page < total_pages %}
+                <a href="{{ url_for('image_gallery', page=page+1) }}">Next &raquo;</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="footer">
+        CopyRight © Plasma Nuka Nugget - All rights reserved - Always remember that Hoang Sa and Truong Sa belong to VietNam  🏳  🏳  🏳
+    </div>
+</body>
+</html>

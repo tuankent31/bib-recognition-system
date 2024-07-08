@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Image Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_batch_img.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 24px;
+            color: green;
+        }
+        .completed {
+            display: none;
+            text-align: center;
+            font-size: 24px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='elements/branch.png') }}" alt="Brand Logo" class="navbar-logo">
+                <span class="brand-name">NukaBot</span>
+            </a>
+        </div>
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="/bib_management">BIB Management</a></li>
+                <li class="dropdown">
+                    <a href="/bib-recognition/photo">BIB Recognition</a>
+                    <div class="dropdown-content">
+                        <a href="/bib-recognition/photo">Photo</a>
+                        <a href="/bib-recognition/video">Video</a>
+                        <a href="/batch-image-recognition">Batch Image Recognition</a>
+                    </div>
+                </li>
+                <li><a href="/image-gallery">Images Searching</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <img src="{{ url_for('static', filename='elements/admin.png') }}" alt="Admin Logo" class="admin-logo">
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Batch Image Recognition</h1>
+        <h3>Remember that all the images are taken from the <u>static/images</u> folder.</h3>
+        <h4>This process will only save the information of each images in database
+            and not show all the recognized images. If you want to check images for a BIB, just
+            go to Images Searching and type the BIB number desired.
+        </h4>
+        <h2>!!! This process can be long to very long !!!</h2>
+        <form id="batchForm" action="{{ url_for('batch_image_recognition') }}" method="post">
+            <button id="process-btn" type="submit">PROCESS IMAGES</button>
+        </form>
+        <div class="loading">
+            <img src="{{ url_for('static', filename='images/loading.gif') }}" alt="Loading..." />
+            <p>Loading...</p>
+        </div>
+        <div class="completed">
+            <p>Completed!</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>CopyRight 2024 - 2025 Plasma Entertainment - All rights reserve</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $('#batchForm').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+                $('.loading').show(); // Show loading message
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    success: function(response) {
+                        $('.loading').hide(); // Hide loading message
+                        $('.completed').show(); // Show completed message
+                    },
+                    error: function() {
+                        $('.loading').hide(); // Hide loading message
+                        alert('There was an error processing the images.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

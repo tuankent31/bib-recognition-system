@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update BIB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_add_bib.css') }}">
+
+</head>
+<body>
+    <h1>Add BIB</h1>
+    <form method="post">
+        <label for="BIB">BIB</label>
+        <input type="text" id="BIB" name="BIB" required>
+
+        <label for="Name">Name</label>
+        <input type="text" name="Name" id="Name" required>
+
+        <label for="DOB">DOB</label>
+        <input type="date" name="DOB" id="DOB" required>
+
+        <label for="Age">Age</label>
+        <input type="number" name="Age" id="Age" required>
+
+        <label for="PhoneNumber">Phone Number</label>
+        <input type="text" name="PhoneNumber" id="PhoneNumber" required>
+
+        <label for="Gender">Gender</label>
+        <select name="Gender" id="Gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+
+        <label for="National">National</label>
+        <input type="text" name="National" id="National">
+
+        <label for="DateRegister">Date Register</label>
+        <input type="date" name="DateRegister" id="DateRegister">
+
+        <label for="DistanceType">Distance Type</label>
+        <input type="text" name="DistanceType" id="DistanceType" required>
+
+        <label for="Time">Time</label>
+        <input type="text" name="Time" id="Time">
+
+        <label for="Pace">Pace</label>
+        <input type="text" name="Pace" id="Pace">
+
+        <label for="Complete">Complete</label>
+        <select name="Complete" id="Complete">
+            <option>YES</option>
+            <option>NO</option>
+        </select>
+
+        <label for="FinisherReceive">Finisher Receive</label>
+        <select name="FinisherReceive" id="FinisherReceive">
+            <option>YES</option>
+            <option>NO</option>
+        </select>
+
+        <button type="submit">Add new</button>
+    </form>
+</body>
+</html>

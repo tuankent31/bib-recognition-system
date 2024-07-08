@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSV Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_show_csv.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='elements/branch.png') }}" alt="Brand Logo" class="navbar-logo">
+                <span class="brand-name">NukaBot</span>
+            </a>
+        </div>
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="/bib_management">BIB Management</a></li>
+                <li class="dropdown">
+                    <a href="/bib-recognition/photo">BIB Recognition</a>
+                    <div class="dropdown-content">
+                        <a href="/bib-recognition/photo">Photo</a>
+                        <a href="/bib-recognition/video">Video</a>
+                        <a href="/batch-image-recognition">Batch Image Recognition</a>
+                    </div>
+                </li>
+                <li><a href="/image-gallery">Images Searching</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <img src="{{ url_for('static', filename='elements/admin.png') }}" alt="Admin Logo" class="admin-logo">
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Tracking Results</h1>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Frame Number<br><input type="text" id="frame_nmr_filter" placeholder="Filter"></th>
+                        <th>People ID<br><input type="text" id="people_id_filter" placeholder="Filter"></th>
+                        <th>People BBox<br><input type="text" id="people_bbox_filter" placeholder="Filter"></th>
+                        <th>BIB Plate BBox<br><input type="text" id="bib_plate_bbox_filter" placeholder="Filter"></th>
+                        <th>BIB Plate BBox Score<br><input type="text" id="bib_plate_bbox_score_filter" placeholder="Filter"></th>
+                        <th>BIB Number<br><input type="text" id="bib_number_filter" placeholder="Filter"></th>
+                        <th>BIB Number Score<br><input type="text" id="bib_number_score_filter" placeholder="Filter"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                        <tr>
+                            <td>{{ row['frame_nmr'] }}</td>
+                            <td>{{ row['people_id'] }}</td>
+                            <td>{{ row['people_bbox'] }}</td>
+                            <td>{{ row['bib_plate_bbox'] }}</td>
+                            <td>{{ row['bib_plate_bbox_score'] }}</td>
+                            <td>{{ row['bib_number'] }}</td>
+                            <td>{{ row['bib_number_score'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="visualization">
+            <p>Do you want to visualize this file?</p>
+            <form action="{{ url_for('visualize') }}" method="get">
+                <button id="visualizeBtn" type="submit">Visualize</button>
+            </form>
+            <p id="loadingText" style="display: none;">Loading...</p>
+
+    </div>
+    </div>
+
+    <div class="footer">
+        CopyRight © Plasma Nuka Nugget - All rights reserved - Always remember that Hoang Sa and Truong Sa belong to VietNam  🏳  🏳  🏳
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const filters = {
+        'frame_nmr_filter': 0,
+        'people_id_filter': 1,
+        'people_bbox_filter': 2,
+        'bib_plate_bbox_filter': 3,
+        'bib_plate_bbox_score_filter': 4,
+        'bib_number_filter': 5,
+        'bib_number_score_filter': 6
+    };
+
+    Object.keys(filters).forEach(function(key) {
+        document.getElementById(key).addEventListener('keyup', function() {
+            filterTable(this.value, filters[key]);
+        });
+    });
+
+    function filterTable(query, columnIndex) {
+        const rows = document.querySelectorAll("tbody tr");
+        rows.forEach(function(row) {
+            const cell = row.querySelectorAll("td")[columnIndex];
+            if (cell) {
+                if (cell.textContent.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        });
+    }
+});
+
+
+    </script>
+    <script>
+        document.getElementById("visualizeBtn").addEventListener("click", function() {
+            document.getElementById("loadingText").style.display = "block";
+            fetch("{{ url_for('visualize') }}")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("loadingText").style.display = "none";
+                    document.getElementById("videoSource").src = data.video_url;
+                    console.log(data.video_url);
+                    document.getElementById("videoContainer").style.display = "block";
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_recog_video.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='elements/branch.png') }}" alt="Brand Logo" class="navbar-logo">
+                <span class="brand-name">NukaBot</span>
+            </a>
+        </div>
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="/bib_management">BIB Management</a></li>
+                <li class="dropdown">
+                    <a href="/bib-recognition/photo">BIB Recognition</a>
+                    <div class="dropdown-content">
+                        <a href="/bib-recognition/photo">Photo</a>
+                        <a href="/bib-recognition/video">Video</a>
+                        <a href="/batch-image-recognition">Batch Image Recognition</a>
+                    </div>
+                </li>
+                <li><a href="/image-gallery">Images Searching</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <img src="{{ url_for('static', filename='elements/admin.png') }}" alt="Admin Logo" class="admin-logo">
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+    <div class="container">
+        <h1>BIB Racing Number Recognition Engine</h1>
+        <h2>Upload Video</h2>
+        <form action="{{ url_for('video_recog') }}" method="post" enctype="multipart/form-data">
+            <label for="file">Choose a video file:</label>
+            <input type="file" name="file" id="file" accept=".mp4">
+            <button type="submit">Process Video</button>
+        </form>
+        {% if csv_file %}
+            <a href="{{ url_for('batch_video_recog') }}/{{ csv_file }}">Download CSV</a>
+        {% endif %}
+    </div>
+    <div class="footer">
+        CopyRight © Plasma Nuka Nugget - All rights reserved - Always remember that Hoang Sa and Truong Sa belong to VietNam  🏳  🏳  🏳
+    </div>
+</body>
+</html>

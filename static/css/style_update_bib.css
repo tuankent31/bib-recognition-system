@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/032/189/793/non_2x/green-sneakers-on-the-ground-in-the-forest-3d-rendering-environmental-friendly-shoes-running-outdoors-in-nature-concept-ai-generated-free-photo.jpg');
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    width: 63%;
+    background: #4CAF50;
+    margin: 0 auto;
+}
+
+form {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}

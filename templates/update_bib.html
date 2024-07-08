@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update BIB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_update_bib.css') }}">
+
+</head>
+<body>
+    <h1>Update BIB: {{ runner['BIB'] }}</h1>
+    <form method="post">
+        <label for="Name">Name</label>
+        <input type="text" name="Name" id="Name" value="{{ runner['Name'] }}" required>
+
+        <label for="DOB">DOB</label>
+        <input type="date" name="DOB" id="DOB" value="{{ runner['DOB'] }}" required>
+
+        <label for="Age">Age</label>
+        <input type="number" name="Age" id="Age" value="{{ runner['Age'] }}" required>
+
+        <label for="PhoneNumber">Phone Number</label>
+        <input type="text" name="PhoneNumber" id="PhoneNumber" value="{{ runner['PhoneNumber'] }}" required>
+
+        <label for="Gender">Gender</label>
+        <select name="Gender" id="Gender">
+            <option value="Male" {% if runner['Gender'] == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if runner['Gender'] == 'Female' %}selected{% endif %}>Female</option>
+        </select>
+
+        <label for="National">National</label>
+        <input type="text" name="National" id="National" value="{{ runner['National'] }}" required>
+
+        <label for="DateRegister">Date Register</label>
+        <input type="date" name="DateRegister" id="DateRegister" value="{{ runner['DateRegister'] }}" required>
+
+        <label for="DistanceType">Distance Type</label>
+        <input type="text" name="DistanceType" id="DistanceType" value="{{ runner['DistanceType'] }}" required>
+
+        <label for="Time">Time</label>
+        <input type="text" name="Time" id="Time" value="{{ runner['Time'] }}" required>
+
+        <label for="Pace">Pace</label>
+        <input type="text" name="Pace" id="Pace" value="{{ runner['Pace'] }}" required>
+
+        <label for="Complete">Complete</label>
+        <select name="Complete" id="Complete">
+            <option value="YES" {% if runner['Complete'] == 'YES' %}selected{% endif %}>YES</option>
+            <option value="NO" {% if runner['Complete'] == 'NO' %}selected{% endif %}>NO</option>
+        </select>
+
+        <label for="FinisherReceive">Finisher Receive</label>
+        <select name="FinisherReceive" id="FinisherReceive">
+            <option value="YES" {% if runner['FinisherReceive'] == 'YES' %}selected{% endif %}>YES</option>
+            <option value="NO" {% if runner['FinisherReceive'] == 'NO' %}selected{% endif %}>NO</option>
+        </select>
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
