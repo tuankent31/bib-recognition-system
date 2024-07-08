@@ -3,7 +3,7 @@
 Giải nén file `bib_recognition_sys.zip`
 
 ## Bước 2: Tải file ảnh để thử nghiệm
-- Tải file ảnh từ link: https://drive.google.com/file/d/1xX26Vhrx_b0sQuAbL2k8G5ha7yw05BHV/view?usp=sharing
+- Tải file ảnh từ link: [https://drive.google.com/file/d/1xX26Vhrx_b0sQuAbL2k8G5ha7yw05BHV/view?usp=sharing](https://drive.google.com/file/d/1bYXd7yzxdwzYr3q0p1ELTKpA-ZxmLXjK/view)
 - Giải nén file và di chuyển ảnh vào thư mục `static/images` 
 
 ## Bước 3: Cài đặt thư viện
