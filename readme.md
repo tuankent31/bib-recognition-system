@@ -6,7 +6,8 @@ Giải nén file `bib_recognition_sys.zip`
 - Tải file ảnh từ link: [https://drive.google.com/file/d/1xX26Vhrx_b0sQuAbL2k8G5ha7yw05BHV/view?usp=sharing](https://drive.google.com/file/d/1bYXd7yzxdwzYr3q0p1ELTKpA-ZxmLXjK/view)
 - Giải nén file và di chuyển ảnh vào thư mục `static/images` 
 
-## Bước 3: Cài đặt thư viện
+## Bước 3: Cài đặt thư viện và mô hình
+- Tải các mô hình và chuyển vào thư mục `models` bằng link: https://drive.google.com/file/d/14j0L_FluRoc0HgkE_xhzzQQDLZ1K39oH/view?usp=sharing
 Mở cửa sổ terminal và tải các thư viện và module cần thiết bằng lệnh `pip install -r requirements.txt`
 
 ## Bước 4: Cài đặt cơ sở dữ liệu
