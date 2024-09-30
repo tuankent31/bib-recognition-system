@@ -20,3 +20,5 @@ Giải nén file `bib_recognition_sys.zip`
 - Đăng nhập với thông tin:
 `username: admin`
 `password: password123`
+
+DEMO SẢN PHẨM: https://bit.ly/3XHKkEB
